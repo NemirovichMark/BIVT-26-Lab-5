@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.Intrinsics.X86;
 
 namespace Lab5
 {
@@ -10,7 +11,16 @@ namespace Lab5
             int[] answer = null;
 
             // code here
-
+            answer = new int[matrix.GetLength(1)];
+            for (int i = 0; i < matrix.GetLength(1); i++)
+            {
+                int cnt = 0;
+                for (int j = 0; j < matrix.GetLength(0); j++)
+                {
+                    if (matrix[j, i] < 0) cnt++;
+                }
+                answer[i] = cnt;
+            }
             // end
 
             return answer;
@@ -19,6 +29,18 @@ namespace Lab5
         {
 
             // code here
+            int[] array = new int [matrix.GetLength(0)];
+            for(int j = 0; j < matrix.GetLength(1); j++)
+            {
+                int min = matrix[0, j];
+                int index = 0;
+                for(int i = 0; i < matrix.GetLength(0); i++)
+                {
+                    min = Math.Min(matrix[i, j], min);
+                }
+                
+            }
+
 
             // end
 
