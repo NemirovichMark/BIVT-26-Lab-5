@@ -361,32 +361,51 @@ namespace Lab5
         {
 
             // code here
+            if (matrix == null)
+            {
+                return;
+            }
+
             int n = matrix.GetLength(0);
             int m = matrix.GetLength(1);
+
+            if (n <= 1 || m == 0)
+            {
+                return;
+            }
+
             for (int j = 0; j < m; j++)
             {
-                for (int i = 0; i < n - 1; i++)
+                int i = 1;
+
+                while (i < n)
                 {
-                    for (int k = i + 1; k < n; k++)
+                    if (i == 0)
                     {
-                        if (j % 2 == 0)
-                        {
-                            if (matrix[i, j] < matrix[k, j])
-                            {
-                                int t = matrix[i, j];
-                                matrix[i, j] = matrix[k, j];
-                                matrix[k, j] = t;
-                            }
-                        }
-                        else
-                        {
-                            if (matrix[i, j] > matrix[k, j])
-                            {
-                                int t = matrix[i, j];
-                                matrix[i, j] = matrix[k, j];
-                                matrix[k, j] = t;
-                            }
-                        }
+                        i++;
+                        continue;
+                    }
+
+                    bool f;
+                    if (j % 2 == 0)
+                    {
+                        f = matrix[i - 1, j] >= matrix[i, j];
+                    }
+                    else
+                    {
+                        f = matrix[i - 1, j] <= matrix[i, j];
+                    }
+
+                    if (f)
+                    {
+                        i++;
+                    }
+                    else
+                    {
+                        int temp = matrix[i, j];
+                        matrix[i, j] = matrix[i - 1, j];
+                        matrix[i - 1, j] = temp;
+                        i--;
                     }
                 }
             }
