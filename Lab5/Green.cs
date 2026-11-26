@@ -228,17 +228,17 @@ namespace Lab5
             }
 
             
-            int minVal = matrix[0, 0];
-            int minCol = 0;
+            int v = matrix[0, 0];
+            int c = 0;
 
             for (int i = 0; i < n; i++)
             {
                 for (int j = 0; j < m; j++)
                 {
-                    if (matrix[i, j] < minVal)
+                    if (matrix[i, j] < v)
                     {
-                        minVal = matrix[i, j];
-                        minCol = j;
+                        v = matrix[i, j];
+                        c = j;
                     }
                 }
             }
@@ -246,14 +246,14 @@ namespace Lab5
 
             for (int i = 0; i < n; i++)
             {
-                for (int j = 0; j <= minCol; j++)
+                for (int j = 0; j <= c; j++)
                 {
                     answer[i, j] = matrix[i, j];
                 }
 
-                answer[i, minCol + 1] = array[i];
+                answer[i, c + 1] = array[i];
 
-                for (int j = minCol + 1; j < m; j++)
+                for (int j = c + 1; j < m; j++)
                 {
                     answer[i, j + 1] = matrix[i, j];
                 }
