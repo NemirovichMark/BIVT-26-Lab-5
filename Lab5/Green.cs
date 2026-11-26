@@ -213,51 +213,51 @@ namespace Lab5
             int[,] answer = null;
 
             // code here
-                int n = matrix.GetLength(0);
-                int m = matrix.GetLength(1);
-                if (array.Length != n || array == null)
-                {
-                    answer = new int[n, m];
-                    for (int i = 0; i < n; i++)
-                    {
-                        for (int j = 0; j < m; j++)
-                        {
-                            answer[i, j] = matrix[i, j];
-                        }
-                    }
+            if (matrix == null)
+            {
+                return null;
+            }
 
-                    return answer;
-                }
-                int v = matrix[0, 0];
-                int c = 0;
+            int n = matrix.GetLength(0);
+            int m = matrix.GetLength(1);
 
-                for (int i = 0; i < n; i++)
+           
+            if (array == null || n == 0 || m == 0 || array.Length != n)
+            {
+                return matrix;
+            }
+
+            
+            int minVal = matrix[0, 0];
+            int minCol = 0;
+
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < m; j++)
                 {
-                    for (int j = 0; j < m; j++)
+                    if (matrix[i, j] < minVal)
                     {
-                        if (matrix[i, j] < v)
-                        {
-                            v = matrix[i, j];
-                            c = j;
-                        }
-                    }
-                }
-                
-                answer = new int[n, m + 1];
-                for (int i = 0; i < n; i++)
-                {
-                    for (int j = 0; j <= v; j++)
-                    {
-                        answer[i, j] = matrix[i, j];
-                    }
-                    answer[i, c + 1] = array[i];
-                    for (int j = c + 1; j < m; j++)
-                    {
-                        answer[i, j + 1] = matrix[i, j];
+                        minVal = matrix[i, j];
+                        minCol = j;
                     }
                 }
-                
+            }
+            answer = new int[n, m + 1];
 
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j <= minCol; j++)
+                {
+                    answer[i, j] = matrix[i, j];
+                }
+
+                answer[i, minCol + 1] = array[i];
+
+                for (int j = minCol + 1; j < m; j++)
+                {
+                    answer[i, j + 1] = matrix[i, j];
+                }
+            }
             // end
 
             return answer;
