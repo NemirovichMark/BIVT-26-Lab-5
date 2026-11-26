@@ -402,9 +402,9 @@ namespace Lab5
                     }
                     else
                     {
-                        int temp = matrix[i, j];
+                        int t = matrix[i, j];
                         matrix[i, j] = matrix[i - 1, j];
-                        matrix[i - 1, j] = temp;
+                        matrix[i - 1, j] = t;
                         i--;
                     }
                 }
