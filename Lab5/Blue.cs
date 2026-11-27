@@ -266,7 +266,7 @@ namespace Lab5
                         }
                     }
                     int jmax2 = 0;
-                    for (int j = 1; j < n; j++)
+                    for (int j = 1; j < m; j++)
                     {
                         if (matrix[i + 1, j] > matrix[i + 1, jmax2])
                         {
