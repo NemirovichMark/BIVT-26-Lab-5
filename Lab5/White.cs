@@ -288,7 +288,61 @@ for (int i = n / 2; i < n; i++)
             int[,] answer = null;
 
             // code here
+    int count = 0;
 
+for (int i = 0; i < matrix.GetLength(0); i++)
+{
+    bool hasZero = false;
+
+    for (int j = 0; j < matrix.GetLength(1); j++)
+    {
+        if (matrix[i, j] == 0)
+        {
+            hasZero = true;
+            break;
+        }
+    }
+
+    if (!hasZero)
+    {
+        count++;
+    }
+}
+
+if (count == matrix.GetLength(0))
+{
+    answer = (int[,])matrix.Clone();
+}
+else
+{
+    answer = new int[count, matrix.GetLength(1)];
+
+    int newRow = 0;
+
+    for (int i = 0; i < matrix.GetLength(0); i++)
+    {
+        bool hasZero = false;
+
+        for (int j = 0; j < matrix.GetLength(1); j++)
+        {
+            if (matrix[i, j] == 0)
+            {
+                hasZero = true;
+                break;
+            }
+        }
+
+        if (!hasZero)
+        {
+            for (int j = 0; j < matrix.GetLength(1); j++)
+            {
+                answer[newRow, j] = matrix[i, j];
+            }
+
+            newRow++;
+        }
+    }
+}
             // end
 
             return answer;
