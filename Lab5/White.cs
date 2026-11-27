@@ -37,7 +37,20 @@ if (count > 0)
             int row = 0, col = 0;
 
             // code here
+    int min = matrix[0, 0];
 
+for (int i = 0; i < matrix.GetLength(0); i++)
+{
+    for (int j = 0; j < matrix.GetLength(1); j++)
+    {
+        if (matrix[i, j] < min)
+        {
+            min = matrix[i, j];
+            row = i;
+            col = j;
+        }
+    }
+}
             // end
 
             return (row, col);
