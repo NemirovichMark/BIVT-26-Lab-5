@@ -271,7 +271,15 @@ for (int i = 0; i < matrix.GetLength(0); i++)
         {
 
             // code here
+    int n = matrix.GetLength(0);
 
+for (int i = n / 2; i < n; i++)
+{
+    for (int j = 0; j <= i; j++)
+    {
+        matrix[i, j] = 1;
+    }
+}
             // end
 
         }
