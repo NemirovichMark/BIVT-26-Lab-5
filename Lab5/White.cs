@@ -130,7 +130,41 @@ for (int i = 0; i < matrix.GetLength(0); i++)
         {
 
             // code here
+    for (int i = 0; i < matrix.GetLength(0); i++)
+{
+    int firstNegative = -1;
+    int lastNegative = -1;
 
+    for (int j = 0; j < matrix.GetLength(1); j++)
+    {
+        if (matrix[i, j] < 0)
+        {
+            if (firstNegative == -1)
+            {
+                firstNegative = j;
+            }
+
+            lastNegative = j;
+        }
+    }
+
+    if (firstNegative > 0)
+    {
+        int maxIndex = 0;
+
+        for (int j = 1; j < firstNegative; j++)
+        {
+            if (matrix[i, j] > matrix[i, maxIndex])
+            {
+                maxIndex = j;
+            }
+        }
+
+        int temp = matrix[i, maxIndex];
+        matrix[i, maxIndex] = matrix[i, lastNegative];
+        matrix[i, lastNegative] = temp;
+    }
+}
             // end
 
         }
