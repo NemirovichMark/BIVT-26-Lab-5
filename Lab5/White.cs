@@ -83,7 +83,32 @@ for (int j = 0; j < matrix.GetLength(1); j++)
             int[,] answer = null;
 
             // code here
+int minRow = 0;
 
+for (int i = 1; i < matrix.GetLength(0); i++)
+{
+    if (matrix[i, 0] < matrix[minRow, 0])
+    {
+        minRow = i;
+    }
+}
+
+answer = new int[matrix.GetLength(0) - 1, matrix.GetLength(1)];
+
+int newRow = 0;
+
+for (int i = 0; i < matrix.GetLength(0); i++)
+{
+    if (i != minRow)
+    {
+        for (int j = 0; j < matrix.GetLength(1); j++)
+        {
+            answer[newRow, j] = matrix[i, j];
+        }
+
+        newRow++;
+    }
+}
             // end
 
             return answer;
