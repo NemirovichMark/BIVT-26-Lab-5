@@ -168,10 +168,14 @@ namespace Lab5
 
             return answer;
         }
+
         public void Task6(int[,] matrix, int k)
         {
             int n = matrix.GetLength(0);
-            int imax = 0;
+            int m = matrix.GetLength(1);
+            if (n == 0 || n != m || k < 0 || k >= m) return;
+
+        int imax = 0;
             for (int i = 1; i < n; i++)
             {
                 if (matrix[i, i] > matrix[imax, imax])
@@ -199,15 +203,14 @@ namespace Lab5
             }
 
         }
+
         public void Task7(int[,] matrix, int[] array)
         {
             int n = matrix.GetLength(0);
             int m = matrix.GetLength(1);
-            if (m < 2)
-            {
-                return;
-            }
-            int imax = 0;
+            if (n == 0 || m < 2 || array == null || array.Length !=m) return;
+
+        int imax = 0;
             for (int i = 1; i < n; i++)
             {
                 if (matrix[i, m - 2] > matrix[imax, m - 2])
@@ -250,10 +253,12 @@ namespace Lab5
         public void Task9(int[,] matrix)
         {
                 int n = matrix.GetLength(0);
+                int m = matrix.GetLength(1);
+                if (n < 2 || m == 0) return;
                 for (int i = 0; i < n - 1; i += 2)
                 {
                     int jmax1 = 0;
-                    for (int j = 1; j < n; j++)
+                    for (int j = 1; j < m; j++)
                     {
                         if (matrix[i, j] > matrix[i, jmax1])
                         {
@@ -277,6 +282,8 @@ namespace Lab5
         public void Task10(int[,] matrix)
         { 
             int n = matrix.GetLength(0);
+            int m = matrix.GetLength(1);
+            if (n == 0 || n != m) return;
             int imax = 0;
             for (int i = 1; i < n; i++)
             { 
@@ -314,23 +321,23 @@ namespace Lab5
             }
             for (int i = 0; i < n - 1; i++)
             {
-                for (int k = i + 1; k < n; k++)
+                for (int j = 0; j < n - 1 - i; j++)
                 {
-                    if (a[i] < a[k])
-                    { 
-                        int t = a[i];
-                        a[i] = a[k];
-                        a[k] = t;
-                        
-                        for (int j = 0; j < m; j++)
+                    if (a[j] < a[j + 1])
+                    {
+                        int t = a[j];
+                        a[j] = a[j + 1];
+                        a[j + 1] = t;
+
+                        for (int k = 0; k < m; k++)
                         {
-                            t = matrix[i, j];
-                            matrix[i, j] = matrix[k, j];
-                            matrix[k, j] = t;
+                            t = matrix[j, k];
+                            matrix[j, k] = matrix[j + 1, k];
+                            matrix[j + 1, k] = t;
                         }
                     }
                 }
-            }
+            }   
         }
         public int[][] Task12(int[][] array)
         {
