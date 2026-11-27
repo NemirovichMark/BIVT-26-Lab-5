@@ -165,7 +165,11 @@ namespace Lab5
             // code here
             int n = matrix.GetLength(0);
             int m = matrix.GetLength(1);
-            for (int i = 0; i < m && i < array.Length; i++)
+            if (array.Length != m)
+            {
+                return;
+            }
+            for (int i = 0; i < m; i++)
             {
                 int max = matrix[0, i];
                 int maxN = 0;
