@@ -59,7 +59,22 @@ for (int i = 0; i < matrix.GetLength(0); i++)
         {
 
             // code here
+        int maxRow = 0;
 
+for (int i = 1; i < matrix.GetLength(0); i++)
+{
+    if (matrix[i, k] > matrix[maxRow, k])
+    {
+        maxRow = i;
+    }
+}
+
+for (int j = 0; j < matrix.GetLength(1); j++)
+{
+    int temp = matrix[0, j];
+    matrix[0, j] = matrix[maxRow, j];
+    matrix[maxRow, j] = temp;
+}
             // end
 
         }
