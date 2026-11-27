@@ -254,36 +254,119 @@ namespace Lab5
         }
         public void Task9(int[,] matrix)
         {
-
             // code here
-
+            if (matrix == null) return;
+            int str = matrix.GetLength(0);
+            int stolb = matrix.GetLength(1);
+            for (int i = 0; i + 1 < str; i += 2)
+            {
+                int p = 0;
+                for (int j = 1; j < stolb; j++)
+                    if (matrix[i, j] > matrix[i, p]) p = j;
+                int q = 0;
+                for (int j = 1; j < stolb; j++)
+                    if (matrix[i + 1, j] > matrix[i + 1, q]) q = j;
+                (matrix[i, p], matrix[i + 1, q]) = (matrix[i + 1, q], matrix[i, p]);
+            }
             // end
-
         }
         public void Task10(int[,] matrix)
         {
-
             // code here
-
+            if (matrix == null) return;
+            int str = matrix.GetLength(0);
+            int stolb = matrix.GetLength(1);
+            if (str != stolb || str == 0) return;
+            int d = Math.Min(str, stolb);
+            if (d == 0) return;
+            int max = matrix[0, 0];
+            int maxR = 0;
+            for (int i = 1; i < d; i++)
+            {
+                if (matrix[i, i] > max)
+                {
+                    max = matrix[i, i];
+                    maxR = i;
+                }
+            }
+            for (int i = 0; i < maxR; i++)
+            {
+                for (int j = i + 1; j < stolb; j++)
+                {
+                    matrix[i, j] = 0;
+                }
+            }
             // end
-
         }
         public void Task11(int[,] matrix)
         {
-
             // code here
-
+            if (matrix == null) return;
+            int str = matrix.GetLength(0);
+            int stolb = matrix.GetLength(1);
+            int[] counts = new int[str];
+            for (int i = 0; i < str; i++)
+            {
+                for (int j = 0; j < stolb; j++)
+                {
+                    if (matrix[i, j] > 0)
+                        counts[i]++;
+                }
+            }
+            for (int pass = 0; pass < str - 1; pass++)
+            {
+                for (int i = 0; i < str - 1 - pass; i++)
+                {
+                    if (counts[i] < counts[i + 1]) 
+                    {
+                        (counts[i], counts[i + 1]) = (counts[i + 1], counts[i]);
+            
+                        for (int j = 0; j < stolb; j++)
+                        {
+                            (matrix[i, j], matrix[i + 1, j]) = (matrix[i + 1, j], matrix[i, j]);
+                        }
+                    }
+                }
+            }
             // end
-
         }
         public int[][] Task12(int[][] array)
         {
             int[][] answer = null;
-
             // code here
-
+            int n = array.Length;
+            double[] avg = new double[n];
+            int total = 0;
+            int count = 0;
+            for (int i = 0; i < n; i++)
+            {
+                int sum = 0;
+                for (int j = 0; j < array[i].Length; j++)
+                {
+                    sum += array[i][j];
+                }
+                total += sum;
+                count += array[i].Length;
+                avg[i] = (double)sum / array[i].Length;
+            }
+            double avgAll = (double)total / count;
+            int keep = 0;
+            for (int i = 0; i < n; i++)
+            {
+                if (avg[i] >= avgAll)
+                    keep++;
+            }
+            answer = new int[keep][];
+            int index = 0;
+            for (int i = 0; i < n; i++)
+            {
+                if (avg[i] >= avgAll)
+                {
+                    answer[index] = array[i];
+                    index++;
+                }
+            }
             // end
-
             return answer;
         }
     }
