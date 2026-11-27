@@ -118,7 +118,10 @@ for (int i = 0; i < matrix.GetLength(0); i++)
             int sum = 0;
 
             // code here
-
+        for (int i = 0; i < matrix.GetLength(0); i++)
+{
+    sum += matrix[i, i];
+}
             // end
 
             return sum;
