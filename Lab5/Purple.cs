@@ -78,6 +78,7 @@ namespace Lab5
                 {
                     answer[rows, column + 1] = matrix[rows, column];
                 }
+                
             }
 
             return answer;
