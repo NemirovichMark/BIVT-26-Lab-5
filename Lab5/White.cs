@@ -351,7 +351,31 @@ else
         {
 
             // code here
+    for (int i = 0; i < array.Length - 1; i++)
+{
+    for (int j = 0; j < array.Length - 1 - i; j++)
+    {
+        int sum1 = 0;
+        int sum2 = 0;
 
+        for (int k = 0; k < array[j].Length; k++)
+        {
+            sum1 += array[j][k];
+        }
+
+        for (int k = 0; k < array[j + 1].Length; k++)
+        {
+            sum2 += array[j + 1][k];
+        }
+
+        if (sum1 > sum2)
+        {
+            int[] temp = array[j];
+            array[j] = array[j + 1];
+            array[j + 1] = temp;
+        }
+    }
+}
             // end
 
         }
