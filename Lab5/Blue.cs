@@ -372,11 +372,18 @@ namespace Lab5
 
             answer = new int[kept][];
             int k = 0;
+
             for (int i = 0; i < n; i++)
             {
                 if (!keep[i]) continue;
+
                 answer[k] = new int[array[i].Length];
-                Array.Copy(array[i], answer[k], array[i].Length);
+
+                for (int j = 0; j < array[i].Length; j++)
+                {
+                    answer[k][j] = array[i][j];
+                }
+
                 k++;
             }
             // end
