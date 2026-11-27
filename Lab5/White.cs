@@ -209,7 +209,43 @@ for (int i = 0; i < matrix.GetLength(0); i++)
         {
 
             // code here
+    for (int i = 0; i < matrix.GetLength(0); i++)
+{
+    if (matrix.GetLength(1) == 1)
+    {
+        continue;
+    }
 
+    int maxIndex = 0;
+
+    for (int j = 1; j < matrix.GetLength(1); j++)
+    {
+        if (matrix[i, j] > matrix[i, maxIndex])
+        {
+            maxIndex = j;
+        }
+    }
+
+    if (maxIndex == 0)
+    {
+        matrix[i, 1] *= 2;
+    }
+    else if (maxIndex == matrix.GetLength(1) - 1)
+    {
+        matrix[i, maxIndex - 1] *= 2;
+    }
+    else
+    {
+        if (matrix[i, maxIndex - 1] <= matrix[i, maxIndex + 1])
+        {
+            matrix[i, maxIndex - 1] *= 2;
+        }
+        else
+        {
+            matrix[i, maxIndex + 1] *= 2;
+        }
+    }
+}
             // end
 
         }
