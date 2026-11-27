@@ -173,7 +173,34 @@ for (int i = 0; i < matrix.GetLength(0); i++)
             int[] negatives = null;
 
             // code here
+        int count = 0;
 
+for (int i = 0; i < matrix.GetLength(0); i++)
+{
+    for (int j = 0; j < matrix.GetLength(1); j++)
+    {
+        if (matrix[i, j] < 0)
+        {
+            count++;
+        }
+    }
+}
+
+negatives = new int[count];
+
+int index = 0;
+
+for (int i = 0; i < matrix.GetLength(0); i++)
+{
+    for (int j = 0; j < matrix.GetLength(1); j++)
+    {
+        if (matrix[i, j] < 0)
+        {
+            negatives[index] = matrix[i, j];
+            index++;
+        }
+    }
+}
             // end
 
             return negatives;
