@@ -231,7 +231,6 @@ namespace Lab5
             if (matrix == null || array == null) return null;
             int rows = matrix.GetLength(0);
             int cols = matrix.GetLength(1);
-            if (array.Length != rows) return null;
 
             int minVal = matrix[0, 0];
             int minCol = 0;
@@ -254,7 +253,7 @@ namespace Lab5
                 {
                     answer[i, j] = matrix[i, j];
                 }
-                answer[i, minCol + 1] = array[i];
+                answer[i, minCol + 1] = i < array.Length ? array[i] : 0;
                 for (int j = minCol + 1; j < cols; j++)
                 {
                     answer[i, j + 1] = matrix[i, j];
