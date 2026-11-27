@@ -389,17 +389,6 @@ namespace Lab5
             }
             //end
         }
-
-        private void SwapRows(int[,] matrix, int row1, int row2)
-        {
-            for (int j = 0; j < matrix.GetLength(1); j++)
-            {
-                int temp = matrix[row1, j];
-                matrix[row1, j] = matrix[row2, j];
-                matrix[row2, j] = temp;
-            }
-            // end
-        }
         public int[][] Task12(int[][] array)
         {
             double sum = 0;
