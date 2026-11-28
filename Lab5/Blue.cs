@@ -185,37 +185,45 @@ namespace Lab5
 
             // code here
             int n = matrix.GetLength(0);
-            if (k < 0 || k >= n) return;
-
-            int maxDiagVal = matrix[0, 0];
-            int maxDiagRow = 0;
-            for (int i = 1; i < n; i++)
+            int m = matrix.GetLength(1);
+            if (n!=m || k<0 || k>=m)
             {
-                if (matrix[i, i] > maxDiagVal)
-                {
-                    maxDiagVal = matrix[i, i];
-                    maxDiagRow = i;
-                }
+                return;
             }
-
-            int firstNegRow = -1;
-            for (int i = 0; i < n; i++)
+            else
             {
-                if (matrix[i, k] < 0)
+                int el = int.MinValue;
+                int iind1 = -1;
+                int iind2 = -1;
+                for (int i = 0;i < n; i++)
                 {
-                    firstNegRow = i;
-                    break;
+                    for (int j = 0;j < m; j++)
+                    {
+                        if (i==j && matrix[i, j]>el)
+                        {
+                            el=matrix[i,j];
+                            iind1 = i;
+                        }
+                    }
                 }
-            }
+                for (int i = 0; i<n; i++)
+                {
+                    if (matrix[i, k]<0)
+                    {
+                        iind2 = i;
+                        break;
+                    }
+                }
+                if (iind2!=-1 && iind1!=iind2)
+                {
+                    for (int j=0; j<m; j++)
+                    {
+                        int p = matrix[iind1, j];
+                        matrix[iind1, j] = matrix[iind2, j];
+                        matrix[iind2, j] = p;
+                    }
+                }
 
-            if (firstNegRow != -1 && firstNegRow != maxDiagRow)
-            {
-                for (int j = 0; j < n; j++)
-                {
-                    int temp = matrix[maxDiagRow, j];
-                    matrix[maxDiagRow, j] = matrix[firstNegRow, j];
-                    matrix[firstNegRow, j] = temp;
-                }
             }
 
             // end
