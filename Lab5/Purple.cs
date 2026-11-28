@@ -10,17 +10,27 @@ namespace Lab5
             int[] answer = null;
 
             // code here
-            answer = new int[matrix.GetLength(1)];
-            for (int i = 0; i < matrix.GetLength(0); i++)
-            {
-                for (int j = 0; j < matrix.GetLength(1); j++)
+            if (matrix == null || matrix.GetLength(0) == 0 || matrix.GetLength(1) == 0)
                 {
-                    if (matrix[i, j] < 0)
+                    answer = new int[0];
+                }
+                else
+                {
+                    int rows = matrix.GetLength(0);
+                    int cols = matrix.GetLength(1);
+                    answer = new int[cols];
+            
+                    for (int j = 0; j < cols; j++)
                     {
-                        answer[j]++;
+                        int count = 0;
+                        for (int i = 0; i < rows; i++)
+                        {
+                            if (matrix[i, j] < 0)
+                                count++;
+                        }
+                        answer[j] = count;
                     }
                 }
-            }
             // end
 
             return answer;
