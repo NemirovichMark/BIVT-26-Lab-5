@@ -1,4 +1,5 @@
-﻿using System.Linq;
+using System;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace Lab5
@@ -230,18 +231,7 @@ namespace Lab5
             int n = matrix.GetLength(0);
             int m = matrix.GetLength(1);
 
-            if (array == null || array.Length != n)
-            {
-                answer = new int[n, m];
-                for (int i = 0; i < n; i++)
-                {
-                    for (int j = 0; j < m; j++)
-                    {
-                        answer[i, j] = matrix[i, j];
-                    }
-                }
-            }
-            else
+            if (array != null && array.Length == n)
             {
                 int min = matrix[0, 0];
                 int col = 0;
@@ -380,40 +370,21 @@ namespace Lab5
         }
         public void Task11(int[,] matrix)
         {
-
             // code here
             int n = matrix.GetLength(0);
             int m = matrix.GetLength(1);
 
+            int[] col = new int[n];
             for (int j = 0; j < m; j++)
             {
-                for (int i = 0; i < n - 1; i++)
-                {
-                    for (int k = 0; k < n - 1 - i; k++)
-                    {
-                        if (j % 2 == 0)
-                        {
-                            if (matrix[k, j] < matrix[k + 1, j])
-                            {
-                                int t = matrix[k, j];
-                                matrix[k, j] = matrix[k + 1, j];
-                                matrix[k + 1, j] = t;
-                            }
-                        }
-                        else
-                        {
-                            if (matrix[k, j] > matrix[k + 1, j])
-                            {
-                                int t = matrix[k, j];
-                                matrix[k, j] = matrix[k + 1, j];
-                                matrix[k + 1, j] = t;
-                            }
-                        }
-                    }
-                }
+                for (int i = 0; i < n; i++) col[i] = matrix[i, j];
+
+                Array.Sort(col);
+                if (j % 2 == 0) Array.Reverse(col); 
+
+                for (int i = 0; i < n; i++) matrix[i, j] = col[i];
             }
             // end
-
         }
         public void Task12(int[][] array)
         {
