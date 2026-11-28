@@ -465,5 +465,3 @@ namespace Lab5
         }
     }
 }
-    }
-}
