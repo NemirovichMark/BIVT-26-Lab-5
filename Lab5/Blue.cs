@@ -218,7 +218,22 @@ namespace Lab5
         {
 
             // code here
-
+            if (array.Length != matrix.GetLength(1)) return;
+            if (matrix.GetLength(1) < 2) return;
+            int n = matrix.GetLength(0), m = matrix.GetLength(1);
+            int maxx = int.MinValue, ind_r = 0;
+            for (int r = 0; r < n; ++r)
+            {
+                if (matrix[r, m - 2] > maxx)
+                {
+                    maxx = matrix[r, m - 2];
+                    ind_r = r;
+                }
+            }
+            for (int c = 0; c < m; ++c)
+            {
+                matrix[ind_r, c] = array[c];
+            }
             // end
 
         }
@@ -226,7 +241,28 @@ namespace Lab5
         {
 
             // code here
-
+            int n = matrix.GetLength(0), m = matrix.GetLength(1);
+            for (int c = 0; c < m; ++c)
+            {
+                int maxx = int.MinValue, ind_r = 0;
+                for (int r = 0; r < n; ++r)
+                {
+                    if (matrix[r, c] > maxx)
+                    {
+                        maxx = matrix[r, c];
+                        ind_r = r;
+                    }
+                }
+                if (ind_r < n / 2)
+                {
+                    int summ = 0;
+                    for (int r = n - 1; r > ind_r; --r)
+                    {
+                        summ += matrix[r, c];
+                    }
+                    matrix[0, c] = summ;
+                }
+            }
             // end
 
         }
@@ -234,7 +270,29 @@ namespace Lab5
         {
 
             // code here
-
+            int n = matrix.GetLength(0), m = matrix.GetLength(1);
+            for (int r = 0; r < n - 1; r += 2)
+            {
+                int maxx1 = int.MinValue, maxx2 = int.MinValue, ind_r1 = 0, ind_c1 = 0, ind_r2 = 0, ind_c2 = 0;
+                for (int c = 0; c < m; ++c)
+                {
+                    if (matrix[r, c] > maxx1)
+                    {
+                        maxx1 = matrix[r, c];
+                        ind_r1 = r;
+                        ind_c1 = c;
+                    }
+                    if (matrix[r + 1, c] > maxx2)
+                    {
+                        maxx2 = matrix[r + 1, c];
+                        ind_r2 = r + 1;
+                        ind_c2 = c;
+                    }
+                }
+                int temp = matrix[ind_r1, ind_c1];
+                matrix[ind_r1, ind_c1] = matrix[ind_r2, ind_c2];
+                matrix[ind_r2, ind_c2] = temp;
+            }
             // end
 
         }
@@ -242,7 +300,27 @@ namespace Lab5
         {
 
             // code here
-
+            if (matrix.GetLength(0) != matrix.GetLength(1)) return;
+            int n = matrix.GetLength(0);
+            int maxx = int.MinValue, ind = 0;
+            for (int i = 0; i < n; ++i)
+            {
+                if (matrix[i, i] > maxx)
+                {
+                    maxx = matrix[i, i];
+                    ind = i;
+                }
+            }
+            for (int r = 0; r < ind; ++r)
+            {
+                for (int c = 0; c < n; ++c)
+                {
+                    if (c > r)
+                    {
+                        matrix[r, c] = 0;
+                    }
+                }
+            }
             // end
 
         }
@@ -250,7 +328,34 @@ namespace Lab5
         {
 
             // code here
-
+            int n = matrix.GetLength(0), m = matrix.GetLength(1);
+            for (int r = 0; r < n - 1; ++r)
+            {
+                for (int r2 = 0; r2 < n - r - 1; ++r2)
+                {
+                    int count1 = 0;
+                    for (int c = 0; c < m; ++c)
+                    {
+                        if (matrix[r2, c] > 0)
+                            ++count1;
+                    }
+                    int count2 = 0;
+                    for (int c = 0; c < m; ++c)
+                    {
+                        if (matrix[r2 + 1, c] > 0)
+                            ++count2;
+                    }
+                    if (count1 < count2)
+                    {
+                        for (int c = 0; c < m; ++c)
+                        {
+                            int temp = matrix[r2, c];
+                            matrix[r2, c] = matrix[r2 + 1, c];
+                            matrix[r2 + 1, c] = temp;
+                        }
+                    }
+                }
+            }
             // end
 
         }
@@ -259,7 +364,68 @@ namespace Lab5
             int[][] answer = null;
 
             // code here
+            double summ = 0, count = 0;
+            for (int r = 0; r < array.GetLength(0); ++r)
+            {
+                for (int c = 0; c < array[r].Length; ++c)
+                {
+                    summ += array[r][c];
+                    ++count;
+                }
+            }
+            double sr = summ / count;
+            int count_del = 0;
+            for (int r = 0; r < array.GetLength(0); ++r)
+            {
+                double summ_r = 0, count_r = 0;
+                for (int c = 0; c < array[r].Length; ++c)
+                {
+                    summ_r += array[r][c];
+                    ++count_r;
+                }
+                double sr_r = summ_r / count_r;
+                if (sr_r < sr)
+                {
+                    ++count_del;
+                }
+            }
+            int[] rows_del = new int[count_del];
+            int ind_rows_del = 0;
+            for (int r = 0; r < array.GetLength(0); ++r)
+            {
+                double summ_r = 0, count_r = 0;
+                for (int c = 0; c < array[r].Length; ++c)
+                {
+                    summ_r += array[r][c];
+                    ++count_r;
+                }
+                double sr_r = summ_r / count_r;
+                if (sr_r < sr)
+                {
+                    rows_del[ind_rows_del] = r;
+                    ++ind_rows_del;
+                }
+            }
+            answer = new int[array.GetLength(0) - count_del][];
+            int ind_answer = 0;
+            for (int r = 0; r < array.GetLength(0); ++r)
+            {
+                bool is_in_rows_del = false;
+                for (int i = 0; i < rows_del.Length; ++i)
+                {
+                    if (r == rows_del[i])
+                    {
+                        is_in_rows_del = true;
+                        break;
+                    }
+                }
+                if (!is_in_rows_del)
+                {
+                    answer[ind_answer] = array[r];
+                    ++ind_answer;
+                }
 
+            }
             // end
 
             return answer;
