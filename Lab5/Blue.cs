@@ -291,37 +291,31 @@ namespace Lab5
         {
 
             // code here
-            int n = matrix.GetLength(0);
-
-            for (int i = 0; i < n - 1; i += 2)
+            int n= matrix.GetLength(0);
+            int m= matrix.GetLength(1);
+            
+            for (int i = 0; i < n-1; i=i+2)
             {
-                int nextRow = i + 1;
-
-                int max1 = matrix[i, 0];
-                int idx1 = 0;
-                for (int j = 1; j < n; j++)
+                int el1= int.MinValue;
+                int el2 = int.MinValue;
+                int jind1 = 0;
+                int jind2 = 0;
+                for (int j=0; j<m;j++)
                 {
-                    if (matrix[i, j] > max1)
+                    if (matrix[i, j]>el1)
                     {
-                        max1 = matrix[i, j];
-                        idx1 = j;
+                        el1= matrix[i, j];
+                        jind1 = j;
+                    }
+                    if (matrix[i+1, j]>el2)
+                    {
+                        el2 = matrix[i+1, j];
+                        jind2 = j;
                     }
                 }
-
-                int max2 = matrix[nextRow, 0];
-                int idx2 = 0;
-                for (int j = 1; j < n; j++)
-                {
-                    if (matrix[nextRow, j] > max2)
-                    {
-                        max2 = matrix[nextRow, j];
-                        idx2 = j;
-                    }
-                }
-
-                int temp = matrix[i, idx1];
-                matrix[i, idx1] = matrix[nextRow, idx2];
-                matrix[nextRow, idx2] = temp;
+                int p = matrix[i, jind1];
+                matrix[i, jind1] = matrix[i + 1, jind2];
+                matrix[i+1, jind2] = p;
             }
             // end
 
@@ -330,24 +324,33 @@ namespace Lab5
         {
 
             // code here
-            int n = matrix.GetLength(0);
-            int maxVal = matrix[0, 0];
-            int maxRow = 0;
-
-            for (int i = 1; i < n; i++)
+            int n=matrix.GetLength(0);
+            int m=matrix.GetLength(1);
+            if (n!=m)
             {
-                if (matrix[i, i] > maxVal)
+                return;
+            }
+            int el = int.MinValue;
+            int iind = 0;
+            for (int i = 0;i < n; i++)
+            {
+                for (int j=0; j<m; j++)
                 {
-                    maxVal = matrix[i, i];
-                    maxRow = i;
+                    if (i==j && matrix[i, j]>el)
+                    {
+                        el= matrix[i, j];
+                        iind = i;
+                    }
                 }
             }
-
-            for (int i = 0; i < maxRow; i++)
+            for (int i = 0; i < n; i++)
             {
-                for (int j = i + 1; j < n; j++)
+                for (int j = 0; j < m; j++)
                 {
-                    matrix[i, j] = 0;
+                    if (j>i && i<iind)
+                    {
+                        matrix[i, j] = 0;
+                    }
                 }
             }
             // end
