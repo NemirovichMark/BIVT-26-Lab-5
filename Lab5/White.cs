@@ -206,9 +206,9 @@ namespace Lab5
             }
 
             if (count == 0)
-            {
-                return new int[0];
-            }
+{
+    return null;
+}
 
             negatives = new int[count];
             int idx = 0;
